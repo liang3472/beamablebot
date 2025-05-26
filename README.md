@@ -27,3 +27,5 @@ CAPSOLVER_AK=capsolver的AK
 ```
 npm start
 ```
+
+4、查看邀请结果，可以在 `output.txt` 中查看邀请明细

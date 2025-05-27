@@ -29,10 +29,10 @@ const init = async (wallet, index) => {
     });
 
     await page.goto(`chrome-extension://${extensionId}/www/index.html#/popup`);
-    await page.evaluate(() => {
+    await page.evaluate((ak) => {
         chrome.storage.local.set({
             config: {
-                "apiKey": CAPSOLVER_AK,
+                "apiKey": ak,
                 "appId": "",
                 "awsCaptchaMode": "click",
                 "awsCollapse": false,
@@ -100,7 +100,7 @@ const init = async (wallet, index) => {
                 "useProxy": false
             }
         });
-    });
+    }, CAPSOLVER_AK);
     await sleep(3 * 1000);
 
     let hasError = false;

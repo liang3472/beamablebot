@@ -4,7 +4,7 @@ import path from 'path';
 import fs from 'fs';
 import Helper from './helper.js';
 import { LIMIT, EACH_COUNT, CODES, CAPSOLVER_AK } from './config.js';
-import { print, sleep, genWallets } from '../src/utils.js';
+import { print, sleep, genWallets, retry } from '../src/utils.js';
 import { initIps, getIp } from './ipPool.js';
 
 const helper = new Helper();
@@ -184,7 +184,7 @@ const exec = async (wallet, index) => {
 const loop = async (list) => {
     let errors = [];
     print(chalk.yellow(`初始化ip池ing...`));
-    await initIps(list.length);
+    await retry(() => initIps(list.length));
     const limit = pLimit(+LIMIT);
     const promises = list.map(async (wallet, index) => {
         return limit(async () => {
